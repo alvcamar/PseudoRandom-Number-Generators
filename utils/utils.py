@@ -4,22 +4,9 @@
 @author: alvarocamarafernandez
 """
 
+from exceptions import NotPrime
+
 lstPrimes = [2]
-
-
-class NotPrime(Exception):
-    """
-    Excepción creada para indicar que el número introducido no es primo de Blum.
-    
-    Para lanzar esta exception, usamos:
-        
-        - n: Excepcion que indica que el número de entrada no es primo. 
-        
-    """
-    
-    def __init__(self, n):
-        self.n = n
-        super().__init__("El valor " + str(n) + " no es primo.")
 
 def initialDescription():
     """
@@ -86,7 +73,7 @@ def isBlumPrime(n, isPrime = False):
     if not isinstance(n, int) or n <= 1:
         raise TypeError("El valor " + (str(n)) + " no es de tipo entero o es menor o igual que 1." )
     
-    if not isPrime: #si sabemos que el valor no es primo, lo comprobamos
+    if not isPrime: #si no sabemos que el valor sea primo o no, lo comprobamos
         if not isPrimeNumber(n):
             raise NotPrime( str(n) )
     
