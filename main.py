@@ -291,7 +291,7 @@ def execute():
         print(" \n ---> GENERADOR " + str(index + 1) + ": ")
         generate(generator)
         while True:
-            ans = input("¿Desea resetear el generador " + str(index + 1) + " y generarlo con nuevos valores? Si ha ocurrido un error, el generador se reseteará (si/no): ")
+            ans = input("¿Desea resetear el generador " + str(index + 1) + " y generarlo con nuevos valores? Si ha ocurrido un error, el generador se reseteará independientemente de la respuesta proporcionada (si/no): ")
             if ans.lower() == "si" or generator.isEmpty():
                 while True: #repetimos hasta obtener un generador correcto
                     try:
