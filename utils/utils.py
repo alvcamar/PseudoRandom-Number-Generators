@@ -12,7 +12,7 @@ def initialDescription():
     """
     Muestra por pantalla la descripción del programa.
     """
-    string = "        ----- GENERADOS DE NÚMEROS PSEUDOALEATORIO -----        " + '\n\n' 
+    string = "        ----- GENERADOR DE NÚMEROS PSEUDOALEATORIO -----        " + '\n\n' 
     string += "Este programa está pensado para generar una determinada cantidad de números aleatorios a partir de una semilla dada. \n\n"
     string += "Inicialmente, el programa le pedira introducir el tamaño de números generados y la semilla usada para producir los generadores. \n\n"
     string += "Posteriormente, podrá indicar, de las opciones, el generador que desea aplicar así como sus parámetros en caso de necesitarse. \n\n"
