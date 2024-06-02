@@ -4,7 +4,7 @@
 @author: alvarocamarafernandez
 """
 
-from exceptions import NotPrime
+from utils.customExceptions import NotPrime
 
 lstPrimes = [2]
 
