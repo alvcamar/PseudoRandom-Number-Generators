@@ -239,6 +239,10 @@ def mix(prngList):
                 break
             else:
                 print ("El valor introducido para el generador debe de ser uno de la lista anterior. Intentelo de nuevo.")
+
+        except InvalidInput as error: #si se lanza este error es porque el valor introducido para k no es correcto -> Volvemos a preguntar al usuario el nuevo valor
+            print(error)
+            raise Exception()
         except Exception as error:
             print(error)
             continue
