@@ -361,10 +361,11 @@ def execute():
             with open(routeFile, 'w') as file:
                 for number in generator.getGeneratedNumbers():
                     file.write(str(number) + "\n") 
+                print("Archivo " + str(name) + " creado correctamente")
         print("Archivos creados correctamente en la carpeta 'Generated Numbers'. ")
     else:
         for index, generator in enumerate(prngList):
-            print ("Generador " + str(index + 1) + ": ")
+            print ("   ----->  Generador " + str(index + 1) + ": ")
             print (generator)
         
     print("Fin de la ejecución.")
