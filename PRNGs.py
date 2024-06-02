@@ -6,41 +6,7 @@
 
 from utils import utils
 import math
-
-
-class InvalidInput(Exception):
-    """
-    Excepción creada para indicar que el input introducido no es válido.
-    
-    Para lanzar esta exception, usamos:
-        
-        - string: cadena de caracteres usada para mostrar el mensaje al lanzar la excepcion. 
-        
-    """
-    
-    def __init__(self, string):
-        self.string = string
-        super().__init__(str(string))
-
-
-
-class NotBlumPrime(Exception):
-    """
-    Excepción creada para indicar que el número introducido no es primo de Blum.
-    
-    Para lanzar esta exception, usamos:
-        
-        - n: indica el número el cual NO es primo de Blum. Es obligatorio.
-        
-        - lst: indica una lista de números de Blum, menores que n, que el usuario puede usar. Es opcional. Por defecto, la lista es vacía. 
-    """
-    
-    def __init__(self, n, lst = []):
-        self.n = n
-        self.lst = lst
-        super().__init__("El número " + str(n) + " no es un primo de Blum. Prueba con alguno de la siguiente lista: " + str(lst))
-
-
+from utils.customExceptions import InvalidInput, NotBlumPrime
 
 class PRNG(object):
     """
@@ -222,7 +188,7 @@ class PRNG(object):
             raise InvalidInput ("El valor proporcionado para m = " + str(m) + " debe ser mayor estricto que 0 .")
         
         if not self.isEmpty(): #comprobamos que no haya ningún elemento añadido a la lista
-            raise InvalidInput ("Este generador contiene elementos pseudoaleatorios y solo se puede utilizar este método con le generador vacío. Resetea la lista.")
+            raise Exception ("Este generador contiene elementos pseudoaleatorios y solo se puede utilizar este método con le generador vacío. Resetea la lista.")
         
         #verificaciones finalizadas. Procedemos a generar la secuencia pseudoaleatoria.
         
@@ -259,7 +225,7 @@ class PRNG(object):
             raise TypeError ("El valor proporcionado para q = " + str(q) + " debe ser entero.")
         
         if not self.isEmpty(): #comprobamos que no haya ningún elemento añadido a la lista
-            raise InvalidInput ("Este generador contiene elementos pseudoaleatorios y solo se puede utilizar este método con le generador vacío. Resetea la lista.")
+            raise Exception ("Este generador contiene elementos pseudoaleatorios y solo se puede utilizar este método con le generador vacío. Resetea la lista.")
         
         #comprobamos que la semilla sea mayor o igual que 1 y menor que N:
          
@@ -298,7 +264,7 @@ class PRNG(object):
             raise TypeError ("El valor proporcionado para k = " + str(k) + " debe ser entero.")
 
         if self.isEmpty() or prng.isEmpty():
-            raise InvalidInput("Uno de los 2 generadores es vacío y no se puede efectuar el algoritmo.")
+            raise Exception("Uno de los 2 generadores es vacío y no se puede efectuar el algoritmo.")
 
         if k <= 0 or k > min(len(self.getGeneratedNumbers()), len(prng.getGeneratedNumbers())): 
             raise InvalidInput("El valor k = " + str(k) + " debe ser un mayor o igual a 1 y menor o igual que la cantidad de números generados por ambos generadores: " + str(min(len(self.getGeneratedNumbers()), len(prng.getGeneratedNumbers()))) ++ " .")    
@@ -320,7 +286,7 @@ class PRNG(object):
             raise TypeError ("El valor proporcionado para k = " + str(k) + " debe ser entero.")
 
         if self.isEmpty():
-            raise InvalidInput("El generador está vacío y no se puede efectuar el algoritmo.")
+            raise Exception("El generador está vacío y no se puede efectuar el algoritmo.")
 
         if k <= 0 or k > len(self.getGeneratedNumbers()) -1:
             raise InvalidInput("El valor k = " + str(k) + " debe ser mayor o igual a 1 y menor o igual que la cantidad de números generados por el generador menos 1: " + str(len(self.getGeneratedNumbers()) -1) + " .") 
