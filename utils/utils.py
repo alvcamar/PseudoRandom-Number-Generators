@@ -27,10 +27,12 @@ def initialDescription():
     """
     string = "        ----- GENERADOS DE NÚMEROS PSEUDOALEATORIO -----        " + '\n\n' 
     string += "Este programa está pensado para generar una determinada cantidad de números aleatorios a partir de una semilla dada. \n\n"
-    string += "Inicialmente, el programa le pedira introducir el tamaño de números generados y la semilla usada para producir los números pseusoaleatorios. \n\n"
+    string += "Inicialmente, el programa le pedira introducir el tamaño de números generados y la semilla usada para producir los generadores. \n\n"
     string += "Posteriormente, podrá indicar, de las opciones, el generador que desea aplicar así como sus parámetros en caso de necesitarse. \n\n"
-    string += "Para utilizar el algoritmo M (shuffleSequences), es necesario disponer de 2 generadores de números aleatorios. Por lo que si se desea usar este algoritmo, se pedirá generar una nueva secuancia.\n\n"
-    string += "Es posible resetear el generador utilizado usando 'reset' una vez se tenga la secuencia pseudoaleatoria generada. \n"
+    string += "Ya generado el PRNG en cuestión, se podrá resetear y generarle de nuevo en caso de que el usuario así lo deseé. \n\n"
+    string += "Una cez todos los generadores estén generados, se pueden mezclar los números pseudoaleatorios obtenidos mediante 2 algoritmos. \n\n"
+    string += "Para utilizar el algoritmo M (shuffleSequences), es necesario disponer de 2 generadores de números aleatorios. Si se disopne de 1 sequencia únicamente y se quiere usar el algoritmo 'M', se recomienda en cambio usar el 'B'.\n\n"
+    string += "Finalmente, este algoritmo da la opción a, o bien mostrar  los números generados por pantalla al final de la ejecución, o bien cada generador guardarse en un archivo de texto que podrá tener el usuario a su disposición. Estos Archivos se encontrarán en la carpeta 'Generated Numbers'. \n\n"
     print (string)
 
 
