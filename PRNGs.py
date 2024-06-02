@@ -267,7 +267,7 @@ class PRNG(object):
             raise Exception("Uno de los 2 generadores es vacío y no se puede efectuar el algoritmo.")
 
         if k <= 0 or k > min(len(self.getGeneratedNumbers()), len(prng.getGeneratedNumbers())): 
-            raise InvalidInput("El valor k = " + str(k) + " debe ser un mayor o igual a 1 y menor o igual que la cantidad de números generados por ambos generadores: " + str(min(len(self.getGeneratedNumbers()), len(prng.getGeneratedNumbers()))) ++ " .")    
+            raise InvalidInput("El valor k = " + str(k) + " debe ser un mayor o igual a 1 y menor o igual que " + str(min(len(self.getGeneratedNumbers()), len(prng.getGeneratedNumbers()))) ++ ".")    
         
         m = prng.__getModule() // 3
         
