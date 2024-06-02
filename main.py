@@ -3,10 +3,14 @@
 """
 @author: alvarocamarafernandez
 """
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) #definimos correctamente la raiz del proyecto
+
 
 import PRNGs
 from utils.utils import initialDescription
-import os
+from utils.customExceptions import InvalidInput
 
 def generate(prng):
     """
@@ -26,7 +30,7 @@ def generate(prng):
 
     Returns
     -------
-    None.
+    prng.
 
     """
     if not isinstance(prng, PRNGs.PRNG):
@@ -120,6 +124,16 @@ def generate(prng):
             
             else:
                 print("El valor introducido para el generador debe de ser uno de la lista anterior. Vuelve a intentarlo")
+        
+        except InvalidInput as error: #error en el algoritmo BBS o en el LCG. Si es en el algoritmo LCG -> volver a introducir los datos. Si es en el algoritmo BBS, hay que cambiar la semilla
+            print(error)
+            if ans.upper() == "BBS":
+                print("Asegurese de resetear el generador.")
+                break
+            else:
+                print("Seleccione de nuevo los valores a utilizar.")
+                continue
+            
         except Exception as error:
             print(error)
             continue
@@ -354,6 +368,3 @@ def execute():
 
 if __name__ == "__main__":
     execute()
-    
-    
-    
