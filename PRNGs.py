@@ -289,7 +289,7 @@ class PRNG(object):
             raise Exception("El generador está vacío y no se puede efectuar el algoritmo.")
 
         if k <= 0 or k > len(self.getGeneratedNumbers()) -1:
-            raise InvalidInput("El valor k = " + str(k) + " debe ser mayor o igual a 1 y menor o igual que la cantidad de números generados por el generador menos 1: " + str(len(self.getGeneratedNumbers()) -1) + " .") 
+            raise InvalidInput("El valor k = " + str(k) + " debe ser mayor o igual a 1 y menor o igual que " + str(len(self.getGeneratedNumbers()) - 1) + ".") 
         
         m = self.__getModule() // 3
         aux, value = (self.getGeneratedNumbers())[0:k], self.getGeneratedNumbers()[k] #lista con los primeros k valores del primer generador
