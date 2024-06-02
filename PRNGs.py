@@ -231,7 +231,7 @@ class PRNG(object):
          
         N = p * q
         if self.__getSeed() < 1 or self.__getSeed() > N-1:
-            raise InvalidInput("El valor de " + str(self.__getSeed()) + " es incorrecto pare el valor de " + str(N) + " . Debe de estar entre 1 y " + str(N-1) + ".")
+            raise InvalidInput("El valor de la semilla es incorrecto. Dicho valor debe de estar entre 1 y " + str(N-1) + ".")
         
         #comprobamos si, realmente, los números introducidos son primos de Blum
         
