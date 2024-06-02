@@ -291,8 +291,8 @@ def execute():
         print(" \n ---> GENERADOR " + str(index + 1) + ": ")
         generate(generator)
         while True:
-            ans = input("¿Desea resetear el generador " + str(index + 1) + " y generarlo con nuevos valores? (si/no): ")
-            if ans.lower() == "si":
+            ans = input("¿Desea resetear el generador " + str(index + 1) + " y generarlo con nuevos valores? Si ha ocurrido un error, el generador se reseteará (si/no): ")
+            if ans.lower() == "si" or generator.isEmpty():
                 while True: #repetimos hasta obtener un generador correcto
                     try:
                         size  = int(input("Indique el número de elementos pseudoaleatorios a generar para el generador " + str(i+1) + ": " ))
