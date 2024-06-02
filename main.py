@@ -218,7 +218,7 @@ def mix(prngList):
                 #preguntamos qué generador van a utilizarse para mezclarse:
                 txt = ""
                 for index , _ in enumerate(prngList):
-                    txt += str("Generador " + str(index) + ", ")
+                    txt += str("Generador " + str(index + 1) + ", ")
                 txt = txt[:-2]
                 while True: #repetimos hasta obtener dos generadores correctos
                     try:
