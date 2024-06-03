@@ -235,7 +235,7 @@ class PRNG(object):
         
         #comprobamos si, realmente, los números introducidos son primos de Blum
         
-        tryP, tryQ = utils.isBlumPrime(p), utils.isBlumPrime(q) #lanzará una excepción si p y q no son números primos.
+        tryP, tryQ = utils.isBlumPrime(p), utils.isBlumPrime(q) #lanzará una excepción si p o q no son números primos.
         
         if not tryP: #si p es primo, pero no es primo de Blum:
             lst = utils.BlumPrimes(max(p, q)) #lista de  números de primos de Blum menores que el máximo de p y q. 
