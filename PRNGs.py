@@ -85,7 +85,7 @@ class PRNG(object):
         return self.getGeneratedNumbers() == []
         
     
-    def __str__ (self):
+    def __str__ (self): #para poder llamar a la función print con un elemento de esta clase
         res = "Lista de números generada: "
         n = len(self.getGeneratedNumbers())
         if n == 0:
@@ -203,8 +203,9 @@ class PRNG(object):
                 self.__addGeneratedNumber(pow(a * (self.getGeneratedNumbers()[ i-1 ]) + c , 1 , m))
         
     
-    def BBS(self, p = 307 , q = 223):
+    def BBS(self, p = 12347 , q = 17167):
         """
+        
         Parameters
         ----------
         p : INT
@@ -218,11 +219,11 @@ class PRNG(object):
         None.
 
         """
-        if not isinstance (p, int):
-            raise TypeError ("El valor proporcionado para p = " + str(p) + " debe ser entero.")
+        if not isinstance (p, int) or p <= 0:
+            raise TypeError ("El valor proporcionado para p = " + str(p) + " debe ser entero positivo.")
             
-        if not isinstance (q, int):
-            raise TypeError ("El valor proporcionado para q = " + str(q) + " debe ser entero.")
+        if not isinstance (q, int) or q <= 0:
+            raise TypeError ("El valor proporcionado para q = " + str(q) + " debe ser entero positivo.")
         
         if not self.isEmpty(): #comprobamos que no haya ningún elemento añadido a la lista
             raise Exception ("Este generador contiene elementos pseudoaleatorios y solo se puede utilizar este método con le generador vacío. Resetea la lista.")
@@ -256,7 +257,21 @@ class PRNG(object):
                 self.__addGeneratedNumber(pow(self.getGeneratedNumbers()[ i-1 ], 2 , N))
         
         
-    def shuffleSequences(self, prng, k = 100): #TODO añadir descripcion. Representa el algoritmo M de Knuth
+    def shuffleSequences(self, prng, k = 100): #Representa el algoritmo M de Knuth
+        """
+        Parameters
+        ----------
+        prng : PRNG
+            generador de números pseudoaleatorios el cual se utilizará para mezclar
+        
+        k : INT
+            número de elementos que tendrá la mezcla final
+
+        Returns
+        -------
+        None.
+
+        """
         if not isinstance(prng, PRNG):
             raise TypeError("Atributo de entrada no es un objeto de la clase PRNG.")
             
@@ -281,7 +296,18 @@ class PRNG(object):
         self.__setGeneratedNumbers(res)
     
     
-    def shuffleOwn(self, k = 100): #TODO añadir descripcion. Representa el algoritmo B de Knuth
+    def shuffleOwn(self, k = 100): #Representa el algoritmo B de Knuth
+        """
+        Parameters
+        ----------
+        k : INT
+            número de elementos que tendrá la mezcla final
+
+        Returns
+        -------
+        None.
+
+        """
         if not isinstance(k, int):
             raise TypeError ("El valor proporcionado para k = " + str(k) + " debe ser entero.")
 
@@ -301,5 +327,3 @@ class PRNG(object):
             aux[ j ] = self.getGeneratedNumbers()[ i ]
         
         self.__setGeneratedNumbers(res)
-
-
