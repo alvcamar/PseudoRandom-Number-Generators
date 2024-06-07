@@ -5,6 +5,8 @@
 """
 
 from utils.customExceptions import NotPrime
+import matplotlib.pyplot as plt
+import itertools  #módulo que itera sobre una lista. En este código, usado para obtener distintos colores para representar el gráfico
 
 lstPrimes = [2]
 
@@ -12,17 +14,58 @@ def initialDescription():
     """
     Muestra por pantalla la descripción del programa.
     """
-    string = "        ----- GENERADOR DE NÚMEROS PSEUDOALEATORIO -----        " + '\n\n' 
+    string = "        ----- GENERADOR DE NÚMEROS PSEUDOALEATORIOS -----        " + '\n\n' 
     string += "Este programa está pensado para generar una determinada cantidad de números aleatorios a partir de una semilla dada. \n\n"
-    string += "Inicialmente, el programa le pedira introducir el tamaño de números generados y la semilla usada para producir los generadores. \n\n"
+    string += "Inicialmente, el programa le pedirá introducir el tamaño de números generados y la semilla usada para producir los generadores. \n\n"
     string += "Posteriormente, podrá indicar, de las opciones, el generador que desea aplicar así como sus parámetros en caso de necesitarse. \n\n"
-    string += "Ya generado el PRNG en cuestión, se podrá resetear y generarle de nuevo en caso de que el usuario así lo deseé. \n\n"
-    string += "Una cez todos los generadores estén generados, se pueden mezclar los números pseudoaleatorios obtenidos mediante 2 algoritmos. \n\n"
-    string += "Para utilizar el algoritmo M (shuffleSequences), es necesario disponer de 2 generadores de números aleatorios. Si se disopne de 1 sequencia únicamente y se quiere usar el algoritmo 'M', se recomienda en cambio usar el 'B'.\n\n"
-    string += "Finalmente, este algoritmo da la opción a, o bien mostrar  los números generados por pantalla al final de la ejecución, o bien cada generador guardarse en un archivo de texto que podrá tener el usuario a su disposición. Estos Archivos se encontrarán en la carpeta 'Generated Numbers'. \n\n"
-    print (string)
+    string += "Ya generado el PRNG en cuestión, se podrá resetear y generarlo de nuevo en caso de que el usuario así lo desee. \n\n"
+    string += "Una vez todos los generadores estén generados, se pueden mezclar los números pseudoaleatorios obtenidos mediante 2 algoritmos. \n\n"
+    string += "Para utilizar el algoritmo M, es necesario disponer de 2 generadores de números aleatorios. Si se dispone de 1 secuencia únicamente y se quiere usar el algoritmo 'M', se recomienda en cambio usar el 'B'.\n\n"
+    string += "Finalmente, este algoritmo da la opción a, o bien mostrar los números generados por pantalla al final de la ejecución, o bien cada generador guardarse en un archivo de texto que podrá tener el usuario a su disposición. Estos archivos se encontrarán en la carpeta 'Generated Numbers'. \n\n"
+    print(string)
 
 
+def plotExecutionGraphCombined(data): #revisar y ver la mejor opcion para entre la función esta y la anterior.
+    """
+    Representa un gráfico tiempo de ejecución de cada algoritmo vs número de elementos procesados.
+
+    Parameters
+    ----------
+    data: Una lista de tuplas, donde cada tupla tiene 3 elementos. Tienen la siguiente estructura e información
+                           (tiempo total de ejecución, número de lementos procesados, algoritmo usado)
+
+    Returns:
+    Gráfico
+    """
+    algs = list(set(item[2] for item in data)) #así recogemos todos los distintos algoritmos que haya presentes
+    
+    colors = itertools.cycle(plt.cm.tab20.colors) #se crea un ciclo de colores. Si nos pasamos de la longitud d ela lista de colores, volvemos al inicio. En este caso, la lista de colores son de 20 elementos
+    
+    colorToAlg = {alg: next(colors) for alg in algs} #a cada algoritmo le asociamos un color. next itera sobre el ciclo anterior (en este caso, el cliclo de colores)
+    
+    for alg in algs:
+        filterLst = list(filter(lambda item: item[2] == alg, data)) #filtramos los elementos asociados al algoritmo que queremos hacer la gráfica
+        
+        #filterLst.sort(lambda item: item[1])
+        
+        lstTimes, numElements = [], []
+        for item in filterLst:
+            lstTimes.append(item[0])
+            numElements.append(item[1])
+        
+        plt.scatter(numElements, lstTimes, color=colorToAlg[alg], label='Algoritmo ' + str(alg), alpha=0.9)
+
+    # Añadir títulos y etiquetas
+    plt.title('Tiempo de ejecución VS número de elementos con todos los algoritmos')
+    plt.xlabel('Número de elementos procesados')
+    plt.ylabel('Tiempo de ejecución (s)')
+    plt.legend()
+    plt.grid(True)
+
+    # Mostrar el gráfico
+    plt.show()
+
+    
 def isPrimeNumber(p):
     """
 
@@ -118,7 +161,6 @@ def listOfPrimes(n):
     lstPrimes = [i for i in range(n + 1) if es_primo[i]]
 
     return lstPrimes
-
 
 def BlumPrimes(n):
     """
