@@ -494,6 +494,9 @@ def execute():
             elif ans.lower() == "no":
                 print("El gráfico no se generará por petición del usuario.")
                 break
+            else:
+                print("El valor introducido no coincide con los esperados (si/no). Intentelo de nuevo.")
+                continue
         except:
             print("El valor introducido no coincide con los esperados (si/no). Intentelo de nuevo.")
             continue
