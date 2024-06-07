@@ -5,7 +5,7 @@
 """
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) #definimos correctamente la raiz del proyecto
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) #definimos correctamente la raiz del proyecto. Así, lo podemos ejecutar en cualquier carpeta del ordenador
 import time
 
 
