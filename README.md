@@ -17,8 +17,8 @@ En este proyecto se han implementado diversos algoritmos que generan números ps
     ```
     En caso de disponer python3 en el dispositivo donde se quiera utilizar el programa, ejecutarlo mediante:
    ```sh
-    python3 main.py
-    ```
+   python3 main.py
+   ```
 4. Configuración opcional: Dentro de la carpeta `utils` existe un archivo llamado `config.py` que contiene dos variables que el usuario puede modificar:
     - `amountPRNGs`: Cantidad máxima de generadores que se podrán generar.
     - `lengthOfPRNGs`: Cantidad de elementos pseudoaleatorios que debe generar cada generador en caso de que el usuario desee emplear esta variable.
