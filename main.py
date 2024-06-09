@@ -5,14 +5,14 @@
 """
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) #definimos correctamente la raiz del proyecto. Así, lo podemos ejecutar en cualquier carpeta del dispositivo
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) #definimos correctamente la raiz del proyecto
 import time
 
 
 import PRNGs
 from utils.utils import initialDescription, plotExecutionGraphCombined
 from utils.customExceptions import InvalidInput, NotPrime, NotBlumPrime
-from utils.config import amountPRNGs
+from utils.config import amountPRNGs, lengthOfPRNGs
 
 def generate(prng):
     """
@@ -372,7 +372,7 @@ def execute():
     initialDescription()
     while True:
         try: 
-            amount = int(input("Introduzca la cantidad de generadores que desea crear (número menor que " + str(amountPRNGs) + ", por eficiencia): "))
+            amount = int(input("Introduzca la cantidad de generadores que desea crear (número menor que " + str(amountPRNGs) + ", por eficiencia): ").strip())
             if amount <= 0 or amount > int(amountPRNGs):
                 print("El valor introducido debe ser positivo y menor que " + str(amountPRNGs) +". Intentelo de nuevo.")
                 continue
@@ -383,28 +383,48 @@ def execute():
     
     prngList = []
     
+    while True:
+        ans = input("¿Desea utilizar el valor por defecto de " + str(lengthOfPRNGs) + " elementos para que todos los generadores generen dichos números pseudoaleatorios? (si/no): ").strip()
+        if ans.lower() in ["si", "no"]:
+            break
+        else:
+            print("El valor introducido no es uno de los esperados. Intentelo de nuevo.")
+            continue
+
     for i in range(amount): # creamos los generadores
         while True: #repetimos hasta obtener un generador correcto
-            try:
-                size  = int(input("Indique el número de elementos pseudoaleatorios a generar para el generador " + str(i+1) + ": " ))
-            except:
-                print("El valor introducido debe de ser de tipo entero. Intentelo de nuevo.")
-                continue
-            while True:
+            if ans.lower() == "no": #tenemos que preguntar por el tamaño del generador
                 try:
-                    seed = int(input("Indique la semilla del generador " + str(i+1) + ": " ))
-                    prngList.append(PRNGs.PRNG(size, seed))
-                    break
+                    size  = int(input("Indique el número de elementos pseudoaleatorios a generar para el generador " + str(i+1) + ": " ))
                 except:
                     print("El valor introducido debe de ser de tipo entero. Intentelo de nuevo.")
-            break
+                    continue
+                while True:
+                    try:
+                        seed = int(input("Indique la semilla del generador " + str(i+1) + ": " ))
+                        prngList.append(PRNGs.PRNG(size, seed))
+                        break
+                    except:
+                        print("El valor introducido debe de ser de tipo entero. Intentelo de nuevo.")
+                break
+            
+            else:   #solo preguntamos semilla a utilizar
+                while True:
+                    try:
+                        seed = int(input("Indique la semilla del generador " + str(i+1) + ": " ))
+                        prngList.append(PRNGs.PRNG(lengthOfPRNGs, seed))
+                        break
+                    except:
+                        print("El valor introducido debe de ser de tipo entero. Intentelo de nuevo.")
+                break
+    
     dataToPlot = []
     for index, generator in enumerate(prngList):
         print(" \n ---> GENERADOR " + str(index + 1) + ": ")
         resultGen = generate(generator)
         dataToPlot.append(resultGen)     #calculamos el tiempo de ejecución y lo guardamos en una lista
         while True:
-            ans = input("¿Desea resetear el generador " + str(index + 1) + " y generarlo con nuevos valores? Si ha ocurrido un error, el generador se reseteará independientemente de la respuesta proporcionada (si/no): ")
+            ans = input("¿Desea resetear el generador " + str(index + 1) + " y generarlo con nuevos valores? Si ha ocurrido un error, el generador se reseteará independientemente de la respuesta proporcionada (si/no): ").strip()
             if ans.lower() == "si" or generator.isEmpty():
                 while True: #repetimos hasta obtener un generador correcto
                     try:
@@ -427,14 +447,15 @@ def execute():
                 break
             else:
                 print("El valor introducido no coincide con los esperados (si/no). Intentelo de nuevo.")
+
     while True: 
-        ans = input("Todos los generadores han sido creados y generados correctamente. ¿Desea mezclar alguno? (si/no): ")
+        ans = input("Todos los generadores han sido creados y generados correctamente. ¿Desea mezclar alguno? (si/no): ").strip()
         if ans.lower() == "si": #si queremos mezclar, damos la opcion a hacerlo la cantidad de veces que el usuario desee
             while True:
                 try:
                     returnMix = mix(prngList)
                     dataToPlot.append(returnMix)
-                    ans = input("Mezcla realizada con éxito. ¿Desea seguir mezclando? (si/no): ")
+                    ans = input("Mezcla realizada con éxito. ¿Desea seguir mezclando? (si/no): ").strip()
                     if ans.lower() == "si":
                         print("Continuamos mezclando los generadores.")
                         continue
@@ -469,34 +490,36 @@ def execute():
         if not os.path.exists("Generated Numbers"):
             os.makedirs("Generated Numbers")
         for index, generator in enumerate(prngList):
-            name = input("Introduce un nombre para el archivo que va a contener los datos del generador " + str(index + 1) + " (solo nombre, la extensión del mismo siempre será .txt): ")
+            name = (input("Introduce un nombre para el archivo que va a contener los datos del generador " + str(index + 1) + " (solo nombre, la extensión del mismo siempre será .txt): ")).strip()
             name += ".txt"
             routeFile = os.path.join("Generated Numbers", name)
             with open(routeFile, 'w') as file:
                 for number in generator.getGeneratedNumbers():
                     file.write(str(number) + "\n") 
                 print("Archivo " + str(name) + " creado correctamente")
-        print("Archivos creados correctamente en la carpeta 'Generated Numbers'. ")
+        print("Todos los archivos han sido creados correctamente en la carpeta 'Generated Numbers'. ")
     else:
         for index, generator in enumerate(prngList):
             print ("   ----->  Generador " + str(index + 1) + ": ")
             print (generator)
-
+        
     while True:
         try:
-            ans = input("¿Desea generar un gráfico mostrando las estadísticas sobre los generadores? (si,no): ")
+            ans = input("¿Desea generar un gráfico mostrando las estadísticas sobre los generadores? (si,no): ").strip()
             if ans.lower() == "si":
                 try:
-                    plotExecutionGraphCombined(dataToPlot)
+                    name = input("Introduzca el nombre del archivo donde se guardará el gráfico: ").strip()
+                    if name.lower() == '':
+                        plotExecutionGraphCombined(dataToPlot)
+                    else:
+                        plotExecutionGraphCombined(dataToPlot, name + '.jpg')
+                    print("Gráfico generado correctamente.")
                 except:
                     print("Ha ocurrido un error en la creación del gráfico. No ha sido posible generarlo.")
                 break
             elif ans.lower() == "no":
                 print("El gráfico no se generará por petición del usuario.")
                 break
-            else:
-                print("El valor introducido no coincide con los esperados (si/no). Intentelo de nuevo.")
-                continue
         except:
             print("El valor introducido no coincide con los esperados (si/no). Intentelo de nuevo.")
             continue
