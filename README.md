@@ -20,8 +20,8 @@ En este proyecto se han implementado diversos algoritmos que generan números ps
    python3 main.py
    ```
 4. Configuración opcional: Dentro de la carpeta `utils` existe un archivo llamado `config.py` que contiene dos variables que el usuario puede modificar:
-    - `amountPRNGs`: Cantidad máxima de generadores que se podrán generar.
-    - `lengthOfPRNGs`: Cantidad de elementos pseudoaleatorios que debe generar cada generador en caso de que el usuario desee emplear esta variable.
+    - `amountPRNGs`: Cantidad máxima de generadores que se podrán generar. Valor de tipo `int`.
+    - `lengthOfPRNGs`: Cantidad de elementos pseudoaleatorios que debe generar cada generador en caso de que el usuario desee emplear esta variable. Valor de tipo `int`.
 
 ## Uso
 
