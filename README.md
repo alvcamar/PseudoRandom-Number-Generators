@@ -2,7 +2,7 @@
 
 ## Descripción
 
-En este proyecto se han implementado diversos algoritmos que generan números pseudoaleatorios, como el algoritmo BBS, LGC, y un par de algoritmos de mezcla de secuencias obtenidos del libro de Knuth. Este proyecto es capaz de crear secuencias pseudoaleatorias, mezclarlas, proporcionar una opción para mostrar por pantalla o guardar las secuencias generadas en un archivo de texto y, finalmente, obtener una gráfica en la que se muestran los tiempos de ejecución separados por algoritmos en función del número de elementos procesados.
+En este proyecto se han implementado diversos algoritmos que generan números pseudoaleatorios, como el algoritmo BBS, LGC, y un par de algoritmos de mezcla de secuencias obtenidos del libro de Knuth. Este proyecto es capaz de crear secuencias pseudoaleatorias, mezclarlas, proporcionar una opción para mostrar por pantalla o guardar las secuencias generadas en un archivo de texto y, finalmente, obtener una gráfica en la que se muestran los tiempos de ejecución separados por algoritmos en función del número de elementos procesados. Todo esto último, en caso de que el usuario que ejecute el proyecto desee obtener dichos archivos y gráfica.
 
 ## Instalación
 
@@ -38,12 +38,3 @@ En este proyecto se han implementado diversos algoritmos que generan números ps
 ## Tecnologías
 
 - Lenguaje de programación: Python
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE](LICENSE) para más detalles.
-
-## Contacto
-
-Para preguntas o problemas, puedes contactarme en [tu-email@ejemplo.com].
-
