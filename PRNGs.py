@@ -18,15 +18,9 @@ class PRNG(object):
         - seed: semilla usada por el generador en cuestión.
         
         - lst: lista de números generada. Inicialmente, vacía. 
+        
+        - module: es un atributo privado que no debe de ser consultado. Este únicamente es utilizado para guardar la información del módulo utilizado y se usará en lo salgoritmos de mezcla.
             
-    En función del generador que estemos usando, se añadirán sus respectivos atributos.
-    
-    lista de métodos de la clase PRNG:
-        -> __init__, __str__ , __addGeneratedNumber no deberían ser invocados desde fuera de los métodos de la clase
-        
-        -> LCG(a,c,m) -> genera una secuencia pseudoaleatoria mediante el algoritmo del generador lineal congruencial.
-        
-        -> BBS(p,q) -> genera una secuencia pseudoaleatoria mediante el algoritmo BBS
     """
     
     
